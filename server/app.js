@@ -1,12 +1,13 @@
 const express = require("express");
 const graphqlHHTP = require("express-graphql");
 const mongoose = require("mongoose");
+const fs = require("fs");
 
 const schema = require("./schema/schema");
 
 const app = express();
 
-const password = process.env.MONGO_GRAPHQL_EXAMPLE_PROJECT_PASSWORD;
+const password = JSON.parse(fs.readFileSync("./mongoDBPassword.json")).password;
 
 mongoose.connect(
   `mongodb+srv://admin:${password}@cluster0-5zsa6.azure.mongodb.net/test?retryWrites=true&w=majority`
