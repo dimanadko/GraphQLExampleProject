@@ -2,6 +2,7 @@ const express = require("express");
 const graphqlHHTP = require("express-graphql");
 const mongoose = require("mongoose");
 const fs = require("fs");
+const cors = require("cors");
 
 const schema = require("./schema/schema");
 
@@ -14,6 +15,7 @@ mongoose.connect(
 );
 mongoose.connection.once("open", () => console.log("connected to database"));
 
+app.use(cors());
 app.use("/graphql", graphqlHHTP({ schema, graphiql: true }));
 
 app.listen(4000, () => {
